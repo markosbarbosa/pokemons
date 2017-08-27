@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <title>Montar time pokémons</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/app.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.controller.js"></script>
+
+
+
+</head>
+
+<body ng-controller="AppController">
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ titulo_modal }}</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <table class="table table-hover"> <thead> <tr> <th>#</th> <th>First Name</th> <th>Last Name</th> <th>Username</th> </tr> </thead> <tbody> <tr> <th scope="row">1</th> <td>Mark</td> <td>Otto</td> <td>@mdo</td> </tr> <tr> <th scope="row">2</th> <td>Jacob</td> <td>Thornton</td> <td>@fat</td> </tr> <tr> <th scope="row">3</th> <td>Larry</td> <td>the Bird</td> <td>@twitter</td> </tr> </tbody> </table>
+
+                    <ul ng-repeat="item in itens_modal">
+                        <li>{{ item.name }}</li>
+                    </ul>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div>
+        <nav class="navbar navbar-default">
+            <div class="container">
+
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
+                    <ul class="nav navbar-nav">
+                        <li class="active">
+                            <a href="#" data-toggle="modal" data-target="#modal" ng-click="cadastrarPokemon($event)" >Novo</a>
+                        </li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+    </div>
+
+
+    <div class="corpo-pagina">
+        <h3>Monte seu time de Pokémons</h3>
+
+
+        <ul class="time-pokemons clearfix">
+            <li class="pokemon-item">
+                <a data-toggle="modal" data-target="#modal"
+                   ng-click="editarHabilidades($event)" class="btn btn-default" href="#">
+                    <img src="imagens/1.png">
+                </a>
+                <ul>
+                    <li class="titulo">Habilidades</li>
+                    <li>Um</li>
+                    <li>Dois</li>
+                    <li class="excluir">
+                        <a href="#"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="pokemon-item">
+                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
+                <ul>
+                    <li class="titulo">Habilidades</li>
+                    <li>Um</li>
+                    <li>Dois</li>
+                </ul>
+            </li>
+            <li class="pokemon-item">
+                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
+                <ul>
+                    <li class="titulo">Habilidades</li>
+                    <li>Um</li>
+                    <li>Dois</li>
+                </ul>
+            </li>
+            <li class="pokemon-item">
+                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
+                <ul>
+                    <li class="titulo">Habilidades</li>
+                    <li>Um</li>
+                    <li>Dois</li>
+                </ul>
+            </li>
+            <li class="pokemon-item">
+                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
+                <ul>
+                    <li class="titulo">Habilidades</li>
+                    <li>Um</li>
+                    <li>Dois</li>
+                </ul>
+            </li>
+            <li class="pokemon-item">
+                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
+                <ul>
+                    <li class="titulo">Habilidades</li>
+                    <li>Um</li>
+                    <li>Dois</li>
+                </ul>
+            </li>
+        </ul>
+
+        <ul ng-repeat="p in pokemons">
+            <li>{{ p.name }}</li>
+        </ul>
+
+
+
+    </div>
+
+
+
+
+</body>
+</html>

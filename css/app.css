@@ -1,0 +1,35 @@
+.corpo-pagina {
+    padding: 20px;
+}
+
+
+ul.time-pokemons,
+ul.time-pokemons ul{
+    /*border: solid 1px #333;*/
+    padding: 0;
+}
+
+
+ul.time-pokemons .titulo {
+    font-weight: bold;
+}
+
+ul.time-pokemons li.excluir a {
+    color: #bc0000;
+}
+
+.time-pokemons li {
+    list-style: none;
+}
+
+.time-pokemons li.pokemon-item {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    float: left;
+}
+
+.time-pokemons li.pokemon-item a {
+    width: 96px;
+    height: 96px;
+    padding: 0;
+}
