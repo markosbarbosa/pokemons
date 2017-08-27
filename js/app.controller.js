@@ -1,48 +1,28 @@
-angular.module('App', [])
-    .controller('AppController',
-
-        function($scope, $http) {
+angular.module('App', []).controller('AppController', function($scope, $http) {
 
 
-    $scope.criaturas = ['Bulbasaur', 'Ivysaur', 'Venusaur'];
-
-
-
-
-
-
-
-
-    // $http.get('http://pokeapi.co/api/v2/pokemon')
-    //     .then(function(response) {
-    //
-    //         console.log(response.data);
-    //
-    //         $scope.pokemons = response.data.results;
-    //     });
-
-
-    // $http.get({
-    //  url: 'testes/pokemons.json'
-    // }).then(function(response) {
-    //         $scope.pokemons = response.data;
-    // });
-
+    $scope.itens_modal = [];
 
     $scope.cadastrarPokemon = function($event) {
 
         $event.preventDefault();
 
-        $scope.titulo_modal = 'Escolher Pokémon';
+        $scope.tituloModal = 'Escolher Pokémon';
 
+        paginacao.init($scope, $http);
 
-        $http.get('testes/pokemons.json', {cache: true}).then(function(response) {
-            $scope.itens_modal = response.data;
-            // cache.put('movies', $scope.itens_modal);
-
-            // console.log(response.data);
-        });
     }
+
+
+
+    $scope.carregarPagina = function($event) {
+
+        $event.preventDefault();
+
+        paginacao.carregarPagina($event.currentTarget);
+
+    }
+
 
 
     $scope.editarHabilidades = function($event) {
@@ -50,7 +30,7 @@ angular.module('App', [])
 
         $event.preventDefault();
 
-        $scope.titulo_modal = 'Gerenciar Moves';
+        $scope.tituloModal = 'Gerenciar Moves';
 
         // $scope.itens_modal =
 
@@ -91,7 +71,7 @@ angular.module('App', [])
 
 
         $http.get('testes/moves.json', {cache: true}).then(function(response) {
-            $scope.itens_modal = response.data;
+            $scope.itensModal = response.data;
             // cache.put('movies', $scope.itens_modal);
 
             // console.log(response.data);

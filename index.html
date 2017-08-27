@@ -12,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/app.controller.js"></script>
 
 
@@ -26,13 +27,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">{{ titulo_modal }}</h4>
+                    <h4 class="modal-title" id="myModalLabel">{{ tituloModal }}</h4>
                 </div>
                 <div class="modal-body">
 
 
                     <ul class="pokemons-disponiveis clearfix">
-                        <li ng-repeat="item in itens_modal">
+                        <li ng-repeat="item in itensModal">
                             <img title="{{ item.name }}" src="imagens/1.png">
                             <span>{{ item.name }}</span>
                             <span>
@@ -43,7 +44,26 @@
                         </li>
                     </ul>
 
-                    Páginas
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination">
+                            <li class="controle-pagina pagina-anterior disabled" ng-click="carregarPagina($event)">
+                                <a href="#" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+
+                            <li ng-repeat="p in listaPaginas" id="pg{{ p.num }}" ng-click="carregarPagina($event)"
+                                ng-class="{ 'num-pagina': true, active: p.num == paginaAtual }">
+                                <a href="{{ p.num }}">{{ p.num }}</a>
+                            </li>
+
+                            <li class="controle-pagina proxima-pagina" ng-click="carregarPagina($event)">
+                                <a href="#" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
 
 
 
