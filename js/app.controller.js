@@ -19,8 +19,8 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         $scope.tituloModal = 'Escolher Pokémon';
 
         paginacao.tipo = 'pokemon';
-        paginacao.urlApi = 'http://localhost/pokemonapi/';
-        // paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/';
+        // paginacao.urlApi = 'http://localhost/pokemonapi/';
+        paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/';
         paginacao.init($scope, $http);
 
     }
@@ -119,8 +119,8 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
         paginacao.tipo = 'move';
-        paginacao.urlApi = 'http://localhost/pokemonapi/moves.php';
-        // paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
+        // paginacao.urlApi = 'http://localhost/pokemonapi/moves.php';
+        paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
 
         paginacao.init($scope, $http);
 
