@@ -13,7 +13,7 @@ ul.time-pokemons .titulo {
     font-weight: bold;
 }
 
-ul.time-pokemons li.excluir a {
+ul.time-pokemons a.excluir {
     color: #bc0000;
 }
 

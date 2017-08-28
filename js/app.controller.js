@@ -18,6 +18,9 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
         $scope.tituloModal = 'Escolher Pokémon';
 
+        paginacao.tipo = 'pokemon';
+        // paginacao.urlApi = 'http://localhost/pokemonapi/';
+        paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/';
         paginacao.init($scope, $http);
 
     }
@@ -30,8 +33,21 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         var idPoke = $event.currentTarget.id;
 
 
-        var poke = $scope.procurarItem($scope.itensModal, idPoke);
+        if($scope.timePokemons.length == 6) {
+            alert('O time deve ter no máximo 6 pokemóns.');
+            return false;
+        }
 
+
+        var consultaPokemon = $scope.procurarItem($scope.timePokemons, idPoke);
+
+        if(consultaPokemon) {
+            alert('"' + consultaPokemon.nome + '" já foi adicionado ao seu time.')
+            return false;
+        }
+
+
+        var poke = $scope.procurarItem($scope.itensModal, idPoke);
 
         $scope.timePokemons.push({
             id: poke.id,
@@ -39,7 +55,6 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
             foto: poke.img,
             moves: []
         });
-
 
 
         $scope.$storage.time = $scope.timePokemons;
@@ -55,10 +70,10 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         var poke = $scope.procurarItem($scope.timePokemons, idPokeExcluir);
 
 
-        // $scope.modalExcluir.nome = poke.nome
         $scope.modalExcluir = {
             nome: poke.nome,
             id: poke.id,
+            tipo: 'pokemon'
         }
 
     }
@@ -94,7 +109,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
 
-    $scope.editarHabilidades = function($event) {
+    $scope.carregarMoves = function($event) {
 
 
         $event.preventDefault();
@@ -103,50 +118,83 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
 
-        // $http.get({
-        //     url: 'testes/moves.json',
-        //     method: 'GET',
-        //     cache: true
-        // }).success(function(response) {
-        //         $scope.itensModal = response.data;
-        //     });
+        paginacao.tipo = 'move';
+        // paginacao.urlApi = 'http://localhost/pokemonapi/moves.php';
+        paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
+
+        paginacao.init($scope, $http);
 
 
-        // var cache = $cacheFactory('myCache');
+        var id = $scope.extrairId($event.currentTarget.href);
 
 
-        // var data = cache.get('movies');
-        //
-        // var teste = 'oioiooio';
-        //
-        // if(!data) {
-        //     console.log('sem cache');
-        //     $http.get('testes/moves.json').then(function(response) {
-        //
-        //
-        //
-        //         data = response.data;
-        //         cache.put('movies', data);
-        //
-        //         console.log(data);
-        //         $scope.itensModal = data;
-        //     });
-        // }
-        //
-        //
-        //
-        // console.log(data);
+        $scope.modalMove = {idPokemon: id};
 
 
-        $http.get('testes/moves.json', {cache: true}).then(function(response) {
-
-            $scope.itensModal = response.data;
-            // cache.put('movies', $scope.itensModal);
-
-            // console.log(response.data);
-        });
 
     }
+
+    $scope.adicionarMove = function($event) {
+
+        $event.preventDefault();
+
+
+
+        var id = $scope.extrairId($event.currentTarget.href);
+        var idPokemon = $scope.modalMove.idPokemon;
+
+        var pokemon = $scope.procurarItem($scope.timePokemons, $scope.modalMove.idPokemon);
+        var move = $scope.procurarItem($scope.itensModal, id);
+
+        if(pokemon.moves.length >= 4) {
+            alert('Cada pokemón só pode ter até 4 moves.');
+            return false;
+        }
+
+
+        var consultaMove = $scope.procurarItem(pokemon.moves, id);
+
+        if(consultaMove) {
+            alert('"' + move.name + '" já foi adicionado a "' + pokemon.nome + '"');
+            return false;
+        }
+
+        pokemon.moves.push(move);
+
+    }
+
+    $scope.confirmarExclusaoMove = function($event, idPoke, idMove) {
+
+        var pokemon = $scope.procurarItem($scope.timePokemons, idPoke);
+        var move = $scope.procurarItem(pokemon.moves, idMove);
+
+        $scope.modalExcluir = {
+            id: move.id,
+            idPoke: pokemon.id,
+            nome: move.name,
+            tipo: 'move'
+        };
+
+    }
+
+
+    $scope.removerMove = function($event) {
+
+
+        var pokemon = $scope.procurarItem($scope.timePokemons, $scope.modalExcluir.idPoke);
+        var move = $scope.procurarItem(pokemon.moves, $scope.modalExcluir.id);
+
+        var moves = pokemon.moves;
+        var id = $scope.modalExcluir.id;
+
+        for(var i in moves) {
+            if(moves[i].id == id) {
+                moves.splice(i, 1);
+            }
+        }
+
+    }
+
 
     /**
      * Procura um item dentro de uma coleção
@@ -161,6 +209,15 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         }
 
         return false;
+    }
+
+    /**
+     * Extrai id da url
+     * @param url URL no formato http://localhost/#{id}
+     */
+    $scope.extrairId = function(url) {
+        var patternID = new RegExp("#[0-9]+$");
+        return patternID.exec(url)[0].replace('#', '');
     }
 
 

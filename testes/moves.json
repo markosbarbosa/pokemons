@@ -1,1 +1,87 @@
-[{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/1\/","name":"pound"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/2\/","name":"karate-chop"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/3\/","name":"double-slap"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/4\/","name":"comet-punch"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/5\/","name":"mega-punch"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/6\/","name":"pay-day"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/7\/","name":"fire-punch"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/8\/","name":"ice-punch"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/9\/","name":"thunder-punch"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/10\/","name":"scratch"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/11\/","name":"vice-grip"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/12\/","name":"guillotine"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/13\/","name":"razor-wind"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/14\/","name":"swords-dance"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/15\/","name":"cut"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/16\/","name":"gust"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/17\/","name":"wing-attack"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/18\/","name":"whirlwind"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/19\/","name":"fly"},{"url":"http:\/\/pokeapi.co\/api\/v2\/move\/20\/","name":"bind"}]
+{
+  "count": 639,
+  "previous": null,
+  "results": [
+    {
+      "url": "http://pokeapi.co/api/v2/move/1/",
+      "name": "pound"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/2/",
+      "name": "karate-chop"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/3/",
+      "name": "double-slap"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/4/",
+      "name": "comet-punch"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/5/",
+      "name": "mega-punch"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/6/",
+      "name": "pay-day"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/7/",
+      "name": "fire-punch"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/8/",
+      "name": "ice-punch"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/9/",
+      "name": "thunder-punch"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/10/",
+      "name": "scratch"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/11/",
+      "name": "vice-grip"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/12/",
+      "name": "guillotine"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/13/",
+      "name": "razor-wind"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/14/",
+      "name": "swords-dance"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/15/",
+      "name": "cut"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/16/",
+      "name": "gust"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/17/",
+      "name": "wing-attack"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/18/",
+      "name": "whirlwind"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/19/",
+      "name": "fly"
+    },
+    {
+      "url": "http://pokeapi.co/api/v2/move/20/",
+      "name": "bind"
+    }
+  ],
+  "next": "http://pokeapi.co/api/v2/move/?offset=20"
+}

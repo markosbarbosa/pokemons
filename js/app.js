@@ -1,7 +1,7 @@
 var paginacao = ({
 
-    urlApi: 'http://localhost/pokemonapi/',
-
+    urlApi: null,
+    tipo: null,//Se é pokémon ou move
 
     /**
      * Inicializa variáveis de controle da paginação
@@ -119,30 +119,29 @@ var paginacao = ({
 
             self.scope.itensModal = response.data.results;
 
-
-            //Carrega imagens dos pokémons
-            //Como existe um padrão de url eu passo o id
-            //do pokémon para carregar sua foto
+            //Acrescenta id e img no caso de pókemons
             //----------------------------------------------
 
-            var imgPoke = null;
-            var idPoke = null;
+            var img = null;
+            var id = null;
             var patternID = new RegExp("\/[0-9]+\/$");
 
 
             for(var i in self.scope.itensModal) {
 
-                idPoke = patternID.exec(self.scope.itensModal[i].url)[0].replace(/\//g, '');
+                id = patternID.exec(self.scope.itensModal[i].url)[0].replace(/\//g, '');
+                self.scope.itensModal[i].id = id;
 
-                imgPoke = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + idPoke + '.png';
 
-                self.scope.itensModal[i].id = idPoke;
-                self.scope.itensModal[i].img = imgPoke;
+                if(self.tipo == 'pokemon') {
+                    img = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + id + '.png';
+
+                    self.scope.itensModal[i].img = img;
+                }
 
             }
 
             //----------------------------------------------
-
 
 
             self.totalRegistros = response.data.count;
