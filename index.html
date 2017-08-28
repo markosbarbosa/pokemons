@@ -12,6 +12,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
     <script type="text/javascript" src="js/app.controller.js"></script>
 
@@ -22,7 +23,7 @@
 <body ng-controller="AppController">
 
     <!-- Modal -->
-    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -34,10 +35,10 @@
 
                     <ul class="pokemons-disponiveis clearfix">
                         <li ng-repeat="item in itensModal">
-                            <img title="{{ item.name }}" src="imagens/1.png">
+                            <img title="{{ item.name }}" src="{{ item.img }}">
                             <span>{{ item.name }}</span>
                             <span>
-                                <a href="#">
+                                <a href="#" id="{{ item.id }}" ng-click="adicionarPokemon($event)" ng-init="{}">
                                     <span class="verde glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                                 </a>
                             </span>
@@ -73,14 +74,35 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
 
 
+    <!-- Modal de de confirmação de exclusão -->
+    <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Confirmação de exclusão</h4>
+                </div>
+                <div class="modal-body">
+
+                    <p>Tem certeza que deseja remover <strong>{{ modalExcluir.nome }}</strong>?</p>
+
+
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" value="{{ modalExcluir.id }}">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="removerPokemon($event)">Sim</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div>
         <nav class="navbar navbar-default">
@@ -90,10 +112,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="#" data-toggle="modal" data-target="#modal" ng-click="cadastrarPokemon($event)" >Novo</a>
+                            <a href="#" data-toggle="modal" data-target="#modal" ng-click="carregarPokemons($event)" >Novo</a>
                         </li>
-                        <li><a href="#">Link</a></li>
-                        <li><a href="#">Link</a></li>
                     </ul>
                 </div>
 
@@ -107,61 +127,26 @@
 
 
         <ul class="time-pokemons clearfix">
-            <li class="pokemon-item">
+
+            <li class="pokemon-item" ng-repeat="poke in timePokemons">
                 <a data-toggle="modal" data-target="#modal"
                    ng-click="editarHabilidades($event)" class="btn btn-default" href="#">
-                    <img src="imagens/1.png">
+                    <img src="{{ poke.foto }}">
                 </a>
                 <ul>
-                    <li class="titulo">Habilidades</li>
-                    <li>Um</li>
-                    <li>Dois</li>
+                    <li class="titulo">{{ poke.nome }}</li>
                     <li class="excluir">
-                        <a href="#"><span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span></a>
+                        <a href="#{{ poke.id }}" id="{{ poke.id }}" ng-click="confirmarExclusao($event)" data-toggle="modal"
+                           data-target="#modalConfirmacao">
+                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                        </a>
                     </li>
                 </ul>
             </li>
-            <li class="pokemon-item">
-                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
-                <ul>
-                    <li class="titulo">Habilidades</li>
-                    <li>Um</li>
-                    <li>Dois</li>
-                </ul>
-            </li>
-            <li class="pokemon-item">
-                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
-                <ul>
-                    <li class="titulo">Habilidades</li>
-                    <li>Um</li>
-                    <li>Dois</li>
-                </ul>
-            </li>
-            <li class="pokemon-item">
-                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
-                <ul>
-                    <li class="titulo">Habilidades</li>
-                    <li>Um</li>
-                    <li>Dois</li>
-                </ul>
-            </li>
-            <li class="pokemon-item">
-                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
-                <ul>
-                    <li class="titulo">Habilidades</li>
-                    <li>Um</li>
-                    <li>Dois</li>
-                </ul>
-            </li>
-            <li class="pokemon-item">
-                <a class="btn btn-default" href="#"><img src="imagens/2.png"></a>
-                <ul>
-                    <li class="titulo">Habilidades</li>
-                    <li>Um</li>
-                    <li>Dois</li>
-                </ul>
-            </li>
+
         </ul>
+
+        <p ng-if="timePokemons.length == 0">Você ainda não montou seu time!</p>
 
         <ul ng-repeat="p in pokemons">
             <li>{{ p.name }}</li>

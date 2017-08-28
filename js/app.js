@@ -95,12 +95,8 @@ var paginacao = ({
         }
 
 
-        this.scope.itensModal = this.carregarRegistros(this.scope.inicioRegistro);
+        this.carregarRegistros(this.scope.inicioRegistro);
 
-
-        console.log(this.scope.inicioRegistro);
-
-        this.carregarRegistros();
 
     },
 
@@ -117,37 +113,48 @@ var paginacao = ({
 
         var offset = this.scope.inicioRegistro > 1 ? '?offset=' + this.scope.inicioRegistro : '';
 
-        // this.http.get('testes/pokemons.json', {cache: true}).then(function(response) {
         this.http.get(this.urlApi + offset, {cache: true}).then(function(response) {
 
             var offset = self.scope.inicioRegistro;
 
             self.scope.itensModal = response.data.results;
 
+
+            //Carrega imagens dos pokémons
+            //Como existe um padrão de url eu passo o id
+            //do pokémon para carregar sua foto
+            //----------------------------------------------
+
+            var imgPoke = null;
+            var idPoke = null;
+            var patternID = new RegExp("\/[0-9]+\/$");
+
+
+            for(var i in self.scope.itensModal) {
+
+                idPoke = patternID.exec(self.scope.itensModal[i].url)[0].replace(/\//g, '');
+
+                imgPoke = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + idPoke + '.png';
+
+                self.scope.itensModal[i].id = idPoke;
+                self.scope.itensModal[i].img = imgPoke;
+
+            }
+
+            //----------------------------------------------
+
+
+
             self.totalRegistros = response.data.count;
 
-            self.montarPaginacao();
+            //Só monta paginação na hora
+            //que abre o modal
+            if(offset == 0)
+                self.montarPaginacao();
 
             paginacao.validarControlesPagina();
 
         });
-
-
-        // this.http.get('http://pokeapi.co/api/v2/pokemon/', {cache: true}).then(function(response) {
-        //
-        //     var offset = self.scope.inicioRegistro;
-        //
-        //     self.scope.itensModal = response.data.results;
-        //
-        //     self.totalRegistros = response.data.count;
-        //
-        //     self.montarPaginacao();
-        //
-        //     paginacao.validarControlesPagina();
-        //
-        // });
-
-
 
     }
 
