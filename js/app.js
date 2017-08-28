@@ -123,6 +123,7 @@ var paginacao = ({
             //----------------------------------------------
 
             var img = null;
+            var imgAlternativa = null;
             var id = null;
             var patternID = new RegExp("\/[0-9]+\/$");
 
@@ -135,7 +136,6 @@ var paginacao = ({
 
                 if(self.tipo == 'pokemon') {
                     img = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + id + '.png';
-
                     self.scope.itensModal[i].img = img;
                 }
 
