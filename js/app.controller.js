@@ -1,9 +1,59 @@
-angular.module('App', ['ngStorage']).controller('AppController', function($scope, $http, $localStorage) {
+angular.module('App', ['ngStorage']).controller('AppController', function($scope, $http, $localStorage, $filter) {
 
 
     $scope.$storage = $localStorage;
     $scope.timePokemons= [];
-    $scope.itensModal = [];
+
+
+    $scope.criaturas = [
+        {
+            id: 1,
+            name: 'Bulbasaur'
+        },
+        {
+            id: 2,
+            name: 'Ivysaur'
+        },
+        {
+            id: 3,
+            name: 'Venusaur'
+        }
+    ];
+
+
+    $scope.p = [
+    {
+        "url":"http://pokeapi.co/api/v2/pokemon/1/",
+        "name":"bulbasaur"
+    },
+    {
+        "url":"http://pokeapi.co/api/v2/pokemon/2/",
+        "name":"ivysaur"
+    },
+    {
+        "url":"http://pokeapi.co/api/v2/pokemon/3/",
+        "name":"venusaur"
+    }
+    ]
+
+
+
+    $scope.testeChange = function() {
+        // console.log($scope.itensModal.filter({name:$scope.pesquisa}));
+
+        // $scope.itensModal = $scope.p;
+    }
+
+    // return false;
+
+    // console.log();
+
+
+    // $scope.criaturas.filter(function() {
+    //
+    // })
+
+    // console.log($filter('filter')($scope.criaturas, {name: 'bul'}));
 
 
     if($scope.$storage.time) {
@@ -19,8 +69,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         $scope.tituloModal = 'Escolher Pokémon';
 
         paginacao.tipo = 'pokemon';
-        // paginacao.urlApi = 'http://localhost/pokemonapi/';
-        paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/';
+        paginacao.urlApi = 'testes/pokemons.json';
         paginacao.init($scope, $http);
 
     }
@@ -119,8 +168,8 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
         paginacao.tipo = 'move';
-        // paginacao.urlApi = 'http://localhost/pokemonapi/moves.php';
-        paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
+        paginacao.urlApi = 'testes/moves.json';
+        // paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
 
         paginacao.init($scope, $http);
 

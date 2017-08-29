@@ -2,7 +2,6 @@
     padding: 20px;
 }
 
-
 ul.time-pokemons,
 ul.time-pokemons ul{
     padding: 0;
@@ -38,17 +37,15 @@ ul.time-pokemons a.excluir {
 }
 
 /* Conteúdo modal */
-.pokemons-disponiveis {
+.registros-disponiveis {
     margin: 0;
     padding: 0;
 }
 
-.pokemons-disponiveis li {
+.registros-disponiveis li {
     list-style: none;
     width: 150px;
     box-sizing: border-box;
-    /*height: 96px;*/
-    /*padding: 5px;*/
     border: solid 1px #3f5a54;
     margin-bottom: -1px;
     margin-right: -1px;
@@ -56,16 +53,20 @@ ul.time-pokemons a.excluir {
     float: left;
 }
 
-.pokemons-disponiveis li a {
+.registros-disponiveis li a {
     display: block;
     margin-bottom: 10px;
     text-decoration: none;
 }
 
-.pokemons-disponiveis li img {
+.registros-disponiveis li img {
     padding: 0;
 }
 
-.pokemons-disponiveis li span {
+.registros-disponiveis li span {
     display: block;
+}
+
+.modal-body .form-pesquisa {
+    margin-bottom: 15px;
 }
