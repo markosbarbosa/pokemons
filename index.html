@@ -35,12 +35,12 @@
                     <form class="form-pesquisa form-inline clearfix">
                         <div class="form-group col-md-8">
                             <label for="campo_pesquia">Pesquisar:</label>
-                            <input ng-change="testeChange()" id="campo_pesquisa" type="text" ng-model="pesquisa" class="form-control" style="width: 85%">
+                            <input ng-change="pesquisarItem()" id="campo_pesquisa" type="text" ng-model="pesquisa" class="form-control" style="width: 85%">
                         </div>
                     </form>
 
                     <ul class="registros-disponiveis clearfix">
-                        <li ng-repeat="item in itensPagina | filter:{name:pesquisa} | orderBy: 'name'">
+                        <li ng-repeat="item in itensPagina | orderBy: 'name'">
                             <img title="{{ item.name }}" src="{{ item.img }}">
                             <span>{{ item.name }}</span>
                             <span>

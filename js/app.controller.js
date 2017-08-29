@@ -38,10 +38,23 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
 
-    $scope.testeChange = function() {
-        // console.log($scope.itensModal.filter({name:$scope.pesquisa}));
+    $scope.pesquisarItem = function() {
 
-        // $scope.itensModal = $scope.p;
+
+        //Filtra elementos
+        $scope.itensModal = $filter('filter')($scope.sourceItens, {name: $scope.pesquisa});
+
+
+        $scope.inicioRegistro = 0;
+
+
+
+        paginacao.atualizarPagina();
+
+        paginacao.montarPaginacao();
+
+
+
     }
 
     // return false;

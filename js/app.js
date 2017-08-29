@@ -39,7 +39,9 @@ var paginacao = {
      */
     montarPaginacao: function () {
 
-        this.scope.totalPaginas = Math.ceil(this.scope.totalRegistros / this.scope.quantidadeRegistros);
+        this.scope.totalPaginas = Math.ceil(this.scope.itensModal.length / this.scope.quantidadeRegistros);
+
+        console.log(this.scope.totalPaginas);
 
         this.scope.listaPaginas = [];
 
@@ -104,6 +106,12 @@ var paginacao = {
             this.scope.inicioRegistro = 0;
         }
 
+
+        this.atualizarPagina();
+    },
+
+
+    atualizarPagina: function() {
         //Delimita registros para a página
         var inicioPagina = this.scope.inicioRegistro;
         var fimPagina = this.scope.inicioRegistro + this.scope.quantidadeRegistros;
@@ -111,10 +119,8 @@ var paginacao = {
 
     },
 
-
     /**
      * Carrega registros da api
-     * @param offset A partir de qual registro irá iniciar
      */
     carregarRegistros: function () {
 
@@ -122,11 +128,7 @@ var paginacao = {
         var self = this;
 
 
-        var offset = this.scope.inicioRegistro > 1 ? '?offset=' + this.scope.inicioRegistro : '';
-
-        this.http.get(this.urlApi + offset, {cache: true}).then(function (response) {
-
-            var offset = self.scope.inicioRegistro;
+        this.http.get(this.urlApi, {cache: true}).then(function (response) {
 
             self.scope.sourceItens = response.data.results;
 
@@ -160,11 +162,11 @@ var paginacao = {
             self.scope.itensModal = self.scope.sourceItens;
 
 
-            //Define os registros que serão carregados na primeira página
-            self.scope.itensPagina = self.scope.itensModal.slice(self.scope.inicioRegistro, self.scope.quantidadeRegistros);
-
 
             self.scope.totalRegistros = self.scope.itensModal.length;
+
+
+            self.atualizarPagina();
 
 
             self.montarPaginacao();
