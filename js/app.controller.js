@@ -3,30 +3,6 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
     $scope.$storage = $localStorage;
     $scope.timePokemons= [];
-    $scope.quantidadeRegistrosValues = [
-        {
-            id: 5,
-            label: 5
-        },
-        {
-            id: 10,
-            label: 10
-        },
-        {
-            id: 20,
-            label: 20
-        },
-        {
-            id: 50,
-            label: 50
-        },
-        {
-            id: 100,
-            label: 100
-        }
-    ];
-
-    $scope.opcao = 0;
 
 
     $scope.quantidadePorPagina = function() {
@@ -74,7 +50,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         $event.preventDefault();
 
         $scope.pesquisa = '';
-        $scope.quantidadeRegistros = $scope.quantidadeRegistrosValues[2];
+        // $scope.quantidadeRegistros = 20;
 
 
         $scope.tituloModal = 'Escolher Pokémon';
@@ -187,7 +163,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
         var id = $scope.extrairId($event.currentTarget.href);
 
-
+        //Carrega id do pokemon para ser utilizado
         $scope.modalMove = {idPokemon: id};
 
 

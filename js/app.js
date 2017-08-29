@@ -23,7 +23,7 @@ var paginacao = {
         this.scope.resultadoFiltro = [];
 
 
-        this.scope.quantidadeRegistros = 20;
+        // this.scope.quantidadeRegistros = 20;
         this.scope.paginaAtual = 1;
         this.scope.totalPaginas = 0;
         this.scope.inicioRegistro = 0;
