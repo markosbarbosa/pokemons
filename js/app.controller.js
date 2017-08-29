@@ -3,39 +3,41 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
     $scope.$storage = $localStorage;
     $scope.timePokemons= [];
-
-
-    $scope.criaturas = [
+    $scope.quantidadeRegistrosValues = [
         {
-            id: 1,
-            name: 'Bulbasaur'
+            id: 5,
+            label: 5
         },
         {
-            id: 2,
-            name: 'Ivysaur'
+            id: 10,
+            label: 10
         },
         {
-            id: 3,
-            name: 'Venusaur'
+            id: 20,
+            label: 20
+        },
+        {
+            id: 50,
+            label: 50
+        },
+        {
+            id: 100,
+            label: 100
         }
     ];
 
+    $scope.opcao = 0;
 
-    $scope.p = [
-    {
-        "url":"http://pokeapi.co/api/v2/pokemon/1/",
-        "name":"bulbasaur"
-    },
-    {
-        "url":"http://pokeapi.co/api/v2/pokemon/2/",
-        "name":"ivysaur"
-    },
-    {
-        "url":"http://pokeapi.co/api/v2/pokemon/3/",
-        "name":"venusaur"
+
+    $scope.quantidadePorPagina = function() {
+
+        $scope.inicioRegistro = 0;
+
+        paginacao.atualizarPagina();
+
+        paginacao.montarPaginacao();
+
     }
-    ]
-
 
 
     $scope.pesquisarItem = function() {
@@ -43,6 +45,8 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
         //Filtra elementos
         $scope.itensModal = $filter('filter')($scope.sourceItens, {name: $scope.pesquisa});
+
+        $scope.itensModal = $filter('orderBy')($scope.itensModal, 'name')
 
 
         $scope.inicioRegistro = 0;
@@ -57,16 +61,6 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
     }
 
-    // return false;
-
-    // console.log();
-
-
-    // $scope.criaturas.filter(function() {
-    //
-    // })
-
-    // console.log($filter('filter')($scope.criaturas, {name: 'bul'}));
 
 
     if($scope.$storage.time) {
@@ -79,11 +73,15 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
         $event.preventDefault();
 
+        $scope.pesquisa = '';
+        $scope.quantidadeRegistros = $scope.quantidadeRegistrosValues[2];
+
+
         $scope.tituloModal = 'Escolher Pokémon';
 
         paginacao.tipo = 'pokemon';
         paginacao.urlApi = 'testes/pokemons.json';
-        paginacao.init($scope, $http);
+        paginacao.init($scope, $http, $filter);
 
     }
 
@@ -184,7 +182,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         paginacao.urlApi = 'testes/moves.json';
         // paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
 
-        paginacao.init($scope, $http);
+        paginacao.init($scope, $http, $filter);
 
 
         var id = $scope.extrairId($event.currentTarget.href);

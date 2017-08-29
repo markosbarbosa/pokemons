@@ -7,10 +7,11 @@ var paginacao = {
      * Inicializa variáveis de controle da paginação
      * @param $scope Variável de escopo do módulo onde o script está sendo chamado
      */
-    init: function ($scope, $http) {
+    init: function ($scope, $http, $filter) {
 
         this.scope = $scope;
         this.http = $http;
+        this.filter = $filter;
 
         //Armazena todos os itens baixados da api
         this.scope.sourceItens = [];
@@ -26,8 +27,6 @@ var paginacao = {
         this.scope.paginaAtual = 1;
         this.scope.totalPaginas = 0;
         this.scope.inicioRegistro = 0;
-        this.scope.totalRegistros = 0;
-
 
         //Carregamento inicial dos registros
         this.carregarRegistros();
@@ -40,8 +39,6 @@ var paginacao = {
     montarPaginacao: function () {
 
         this.scope.totalPaginas = Math.ceil(this.scope.itensModal.length / this.scope.quantidadeRegistros);
-
-        console.log(this.scope.totalPaginas);
 
         this.scope.listaPaginas = [];
 
@@ -114,8 +111,10 @@ var paginacao = {
     atualizarPagina: function() {
         //Delimita registros para a página
         var inicioPagina = this.scope.inicioRegistro;
-        var fimPagina = this.scope.inicioRegistro + this.scope.quantidadeRegistros;
+        var fimPagina = parseInt(this.scope.inicioRegistro) + parseInt(this.scope.quantidadeRegistros);
         this.scope.itensPagina = this.scope.itensModal.slice(inicioPagina, fimPagina);
+
+        console.log(this.scope.itensPagina);
 
     },
 
@@ -159,11 +158,7 @@ var paginacao = {
 
             //Como inicialmente não há filtro
             //o resultado da pesquisa contém todos os registros
-            self.scope.itensModal = self.scope.sourceItens;
-
-
-
-            self.scope.totalRegistros = self.scope.itensModal.length;
+            self.scope.itensModal = self.filter('orderBy')(self.scope.sourceItens, 'name');
 
 
             self.atualizarPagina();

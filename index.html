@@ -33,15 +33,33 @@
                 <div class="modal-body">
 
                     <form class="form-pesquisa form-inline clearfix">
-                        <div class="form-group col-md-8">
-                            <label for="campo_pesquia">Pesquisar:</label>
-                            <input ng-change="pesquisarItem()" id="campo_pesquisa" type="text" ng-model="pesquisa" class="form-control" style="width: 85%">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="campo_pesquia">Pesquisar:</label>
+                                <input ng-change="pesquisarItem()" id="campo_pesquisa" type="text" ng-model="pesquisa" class="form-control" style="width: 85%">
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label for="">Quantidade por página:</label>
+                                <select class="form-control" ng-options="op.label for op in quantidadeRegistrosValues" ng-model="quantidadeRegistros" ng-change="quantidadePorPagina()">
+                                    <!--<option value="5">5</option>-->
+                                    <!--<option value="10">10</option>-->
+                                    <!--<option value="20" selected>20</option>-->
+                                    <!--<option value="50">50</option>-->
+                                    <!--<option value="100">100</option>-->
+                                </select>
+
+                            </div>
+
                         </div>
-                        <div class="col-md-4"><strong>Resultados:</strong> {{ itensModal.length }}</div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-4"><strong>Resultados:</strong> {{ itensModal.length }}</div>
+                        </div>
                     </form>
 
+
                     <ul class="registros-disponiveis clearfix">
-                        <li ng-repeat="item in itensPagina | orderBy: 'name'">
+                        <li ng-repeat="item in itensPagina">
                             <img title="{{ item.name }}" src="{{ item.img }}">
                             <span>{{ item.name }}</span>
                             <span>
@@ -101,13 +119,29 @@
 
 
                     <form class="form-pesquisa form-inline clearfix">
-                        <div class="form-group col-md-8">
-                            <label for="campo_pesquia">Pesquisar:</label>
-                            <input ng-change="pesquisarItem()" id="campo_pesquisa" type="text" ng-model="pesquisa" class="form-control" style="width: 85%">
-                        </div>
-                        <div class="col-md-4"><strong>Resultados:</strong> {{ itensModal.length }}</div>
-                    </form>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="campo_pesquia">Pesquisar:</label>
+                                <input ng-change="pesquisarItem()" id="campo_pesquisa" type="text" ng-model="pesquisa" class="form-control" style="width: 85%">
+                            </div>
 
+                            <div class="form-group col-md-4">
+                                <label for="">Quantidade por página:</label>
+                                <select class="form-control" ng-init="quantidadeRegistros='20'" ng-model="quantidadeRegistros" ng-change="quantidadePorPagina()">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20" selected>20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+
+                            </div>
+
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-md-4"><strong>Resultados:</strong> {{ itensModal.length }}</div>
+                        </div>
+                    </form>
 
 
 
@@ -206,10 +240,9 @@
     <div class="corpo-pagina">
         <h3>Monte seu time de Pokémons</h3>
 
-
         <ul class="time-pokemons clearfix">
 
-            <li class="pokemon-item" ng-repeat="poke in timePokemons">
+            <li class="pokemon-item" ng-repeat="poke in timePokemons | orderBy : 'nome'">
                 <a data-toggle="modal" data-target="#modalMove"
                    ng-click="carregarMoves($event)" class="btn btn-default" href="#{{ poke.id }}">
                     <img src="{{ poke.foto }}">
@@ -239,16 +272,7 @@
 
         <p ng-if="timePokemons.length == 0">Você ainda não montou seu time!</p>
 
-        <ul ng-repeat="p in pokemons">
-            <li>{{ p.name }}</li>
-        </ul>
-
-
-
     </div>
-
-
-
 
 </body>
 </html>
