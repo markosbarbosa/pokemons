@@ -48,6 +48,16 @@ ul.time-pokemons a.excluir {
     text-align: center;
 }
 
+.navbar-default {
+    background-color: #337ab7;
+}
+
+#texto-informativo {
+    color: #fff;
+    line-height: 165%;
+    padding-left: 50px;
+}
+
 /* Conteúdo modal */
 .registros-disponiveis {
     margin: 0;
