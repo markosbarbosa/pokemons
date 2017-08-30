@@ -1,10 +1,8 @@
 angular.module('App', ['ngStorage']).controller('AppController', function($scope, $http, $localStorage, $filter) {
 
     $scope.$storage = $localStorage;
-    $scope.timePokemons= [];
-
-
     $jQuery = window.jQuery;
+    $scope.timePokemons= [];
 
 
     //Altera quantidade de registros por página
@@ -52,8 +50,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         $scope.pesquisa = '';
 
         paginacao.tipo = 'pokemon';
-        paginacao.urlApi = 'testes/pokemons.json';
-        // paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/?limit=784';
+        paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/?limit=784';
         paginacao.init($scope, $http, $filter);
 
     }
@@ -182,8 +179,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
         paginacao.tipo = 'move';
-        paginacao.urlApi = 'testes/moves.json';
-        // paginacao.urlApi = 'http://pokeapi.co/api/v2/move/';
+        paginacao.urlApi = 'http://pokeapi.co/api/v2/move/?limit=1000';
 
         paginacao.init($scope, $http, $filter);
 

@@ -57,6 +57,8 @@ var paginacao = {
         //a página selecionada será a página 1
         this.scope.paginaAtual = 1;
 
+        this.validarControlesPagina();
+
     },
 
 
@@ -67,6 +69,7 @@ var paginacao = {
 
         if (this.scope.paginaAtual == 1) $('li.pagina-anterior').addClass('disabled');
         else $('.pagina-anterior').removeClass('disabled');
+
         if (this.scope.totalPaginas == this.scope.paginaAtual) $('li.proxima-pagina').addClass('disabled');
         else $('.proxima-pagina').removeClass('disabled');
 
