@@ -236,7 +236,7 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-6">
                     <ul class="nav navbar-nav">
                         <li class="active">
-                            <a href="#" data-toggle="modal" data-target="#modal" ng-click="carregarPokemons($event)" >Novo</a>
+                            <a href="#" data-toggle="modal" data-target="#modal" ng-click="carregarPokemons($event)" >Novo Pokémon</a>
                         </li>
                     </ul>
                 </div>
@@ -245,44 +245,58 @@
         </nav>
     </div>
 
+    <button type="button" class="btn btn-default">Default</button>
+
+
+
 
     <div class="corpo-pagina">
-        <h3>Monte seu time de Pokémons</h3>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><strong>Monte seu time de Pokémons</strong>  (Para adicionar moves, clique sobre a foto do pókemon)</h3>
+            </div>
+            <div class="panel-body">
 
+                <ul class="time-pokemons clearfix">
 
-        <ul class="time-pokemons clearfix">
-
-            <li class="pokemon-item" ng-repeat="poke in timePokemons | orderBy : 'nome'">
-                <a data-toggle="modal" data-target="#modalMove"
-                   ng-click="carregarMoves($event)" class="btn btn-default" href="#{{ poke.id }}">
-                    <img src="{{ poke.foto }}">
-                </a>
-                <ul>
-                    <li class="titulo">{{ poke.nome }}
-                        <a class="excluir" href="#{{ poke.id }}" id="{{ poke.id }}" ng-click="confirmarExclusao($event)"
-                           data-toggle="modal" data-target="#modalConfirmacao">
-                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                    <li class="pokemon-item" ng-repeat="poke in timePokemons | orderBy : 'nome'">
+                        <a data-toggle="modal" data-target="#modalMove"
+                           ng-click="carregarMoves($event)" class="btn btn-default" href="#{{ poke.id }}">
+                            <img src="{{ poke.foto }}">
                         </a>
-                    </li>
+                        <ul>
+                            <li class="titulo">{{ poke.nome }}
+                                <a class="excluir" href="#{{ poke.id }}" id="{{ poke.id }}" ng-click="confirmarExclusao($event)"
+                                   data-toggle="modal" data-target="#modalConfirmacao">
+                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                </a>
+                            </li>
 
-                    <li ng-if="poke.moves.length > 0">Moves:</li>
-                    <li ng-repeat="m in poke.moves">
-                        {{ m.name }}
-                        <a class="excluir" href="#{{ m.id }}" ng-click="confirmarExclusaoMove($event, poke.id, m.id)" data-toggle="modal"
-                           data-target="#modalConfirmacao">
-                            <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-                        </a>
-                    </li>
+                            <li ng-if="poke.moves.length > 0">Moves:</li>
+                            <li ng-repeat="m in poke.moves">
+                                {{ m.name }}
+                                <a class="excluir" href="#{{ m.id }}" ng-click="confirmarExclusaoMove($event, poke.id, m.id)" data-toggle="modal"
+                                   data-target="#modalConfirmacao">
+                                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
+                                </a>
+                            </li>
 
+
+                        </ul>
+                    </li>
 
                 </ul>
-            </li>
 
-        </ul>
+                <p ng-if="timePokemons.length == 0">Você ainda não montou seu time!</p>
 
-        <p ng-if="timePokemons.length == 0">Você ainda não montou seu time!</p>
+
+            </div>
+        </div>
+
 
     </div>
+
+
 
 </body>
 </html>

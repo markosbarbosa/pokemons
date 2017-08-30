@@ -7,6 +7,7 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
     $jQuery = window.jQuery;
 
 
+    //Altera quantidade de registros por página
     $scope.quantidadePorPagina = function() {
 
         $scope.inicioRegistro = 0;
@@ -30,12 +31,9 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         $scope.inicioRegistro = 0;
 
 
-
         paginacao.atualizarPagina();
 
         paginacao.montarPaginacao();
-
-
 
     }
 
