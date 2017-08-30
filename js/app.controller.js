@@ -1,8 +1,10 @@
 angular.module('App', ['ngStorage']).controller('AppController', function($scope, $http, $localStorage, $filter) {
 
-
     $scope.$storage = $localStorage;
     $scope.timePokemons= [];
+
+
+    $jQuery = window.jQuery;
 
 
     $scope.quantidadePorPagina = function() {
@@ -50,13 +52,10 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         $event.preventDefault();
 
         $scope.pesquisa = '';
-        // $scope.quantidadeRegistros = 20;
-
-
-        $scope.tituloModal = 'Escolher Pokémon';
 
         paginacao.tipo = 'pokemon';
         paginacao.urlApi = 'testes/pokemons.json';
+        // paginacao.urlApi = 'http://pokeapi.co/api/v2/pokemon/?limit=784';
         paginacao.init($scope, $http, $filter);
 
     }
@@ -70,7 +69,15 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
 
 
         if($scope.timePokemons.length == 6) {
-            alert('O time deve ter no máximo 6 pokémons.');
+            $jQuery('#msg-alerta')
+                .html('<strong>O time deve ter no máximo 6 pokémons.</strong>')
+                .fadeIn();
+
+
+            setTimeout(function() {
+                $jQuery('#msg-alerta').fadeOut();
+            }, 3000)
+
             return false;
         }
 
@@ -78,12 +85,22 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         var consultaPokemon = $scope.procurarItem($scope.timePokemons, idPoke);
 
         if(consultaPokemon) {
-            alert('"' + consultaPokemon.nome + '" já foi adicionado ao seu time.')
+            $jQuery('#msg-alerta')
+                .html('<strong>' + consultaPokemon.nome + '</strong> já foi adicionado ao seu time.')
+                .fadeIn();
+
+
+            setTimeout(function() {
+                $jQuery('#msg-alerta').fadeOut();
+            }, 3000)
+
+
             return false;
         }
 
 
         var poke = $scope.procurarItem($scope.itensModal, idPoke);
+
 
         $scope.timePokemons.push({
             id: poke.id,
@@ -92,8 +109,20 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
             moves: []
         });
 
-
+        //Guarda no localStorage
         $scope.$storage.time = $scope.timePokemons;
+
+
+
+        $jQuery('#msg-sucesso')
+            .html('<strong>Pokémon adicionado com sucesso.</strong>')
+            .fadeIn();
+
+
+        setTimeout(function() {
+            $jQuery('#msg-sucesso').fadeOut();
+        }, 3000)
+
 
     }
 
@@ -183,7 +212,16 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         var move = $scope.procurarItem($scope.itensModal, id);
 
         if(pokemon.moves.length >= 4) {
-            alert('Cada pokemón só pode ter até 4 moves.');
+            $jQuery('#msg-alerta')
+                .html('<strong>Cada pokemón só pode ter até 4 moves.</strong>')
+                .fadeIn();
+
+
+            setTimeout(function() {
+                $jQuery('#msg-alerta').fadeOut();
+            }, 3000)
+
+
             return false;
         }
 
@@ -191,11 +229,32 @@ angular.module('App', ['ngStorage']).controller('AppController', function($scope
         var consultaMove = $scope.procurarItem(pokemon.moves, id);
 
         if(consultaMove) {
-            alert('"' + move.name + '" já foi adicionado a "' + pokemon.nome + '"');
+
+            $jQuery('#msg-alerta')
+                .html('<strong>' + move.name + '</strong> já foi adicionado a ' + '<strong>' + pokemon.nome + '<strong>.')
+                .fadeIn();
+
+
+            setTimeout(function() {
+                $jQuery('#msg-alerta').fadeOut();
+            }, 3000)
+
+
             return false;
         }
 
         pokemon.moves.push(move);
+
+
+        $jQuery('#msg-sucesso')
+            .html('<strong>' + move.name + '</strong> adicionado a ' + '<strong>' + pokemon.nome + '</strong>.')
+            .fadeIn();
+
+
+        setTimeout(function() {
+            $jQuery('#msg-sucesso').fadeOut();
+        }, 3000)
+
 
     }
 

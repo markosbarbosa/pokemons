@@ -22,6 +22,11 @@
 
 <body ng-controller="AppController">
 
+    <!-- Alertas -->
+    <div id="msg-sucesso" class="alert alert-success" role="alert"></div>
+    <div id="msg-erro" class="alert alert-danger" role="alert"></div>
+    <div id="msg-alerta" class="alert alert-warning" role="alert"></div>
+
     <!-- Modal -->
     <div class="modal fade" id="modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
@@ -30,7 +35,9 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title">{{ tituloModal }}</h4>
+                    <h4 class="modal-title">Escolher Pokémon</h4>
+
+
                 </div>
                 <div class="modal-body">
 
@@ -252,8 +259,8 @@
                 </a>
                 <ul>
                     <li class="titulo">{{ poke.nome }}
-                        <a class="excluir" href="#{{ poke.id }}" id="{{ poke.id }}" ng-click="confirmarExclusao($event)" data-toggle="modal"
-                           data-target="#modalConfirmacao">
+                        <a class="excluir" href="#{{ poke.id }}" id="{{ poke.id }}" ng-click="confirmarExclusao($event)"
+                           data-toggle="modal" data-target="#modalConfirmacao">
                             <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
                         </a>
                     </li>

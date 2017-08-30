@@ -114,8 +114,6 @@ var paginacao = {
         var fimPagina = parseInt(this.scope.inicioRegistro) + parseInt(this.scope.quantidadeRegistros);
         this.scope.itensPagina = this.scope.itensModal.slice(inicioPagina, fimPagina);
 
-        console.log(this.scope.itensPagina);
-
     },
 
     /**

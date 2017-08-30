@@ -36,6 +36,18 @@ ul.time-pokemons a.excluir {
     color: #409440;
 }
 
+#msg-sucesso,
+#msg-erro,
+#msg-alerta {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    opacity: 0.9;
+    display: none;
+    z-index:100000000;
+    text-align: center;
+}
+
 /* Conteúdo modal */
 .registros-disponiveis {
     margin: 0;
